@@ -148,30 +148,27 @@ def matVec(matrix,vector):
     For each matrix row, each vector columns = 1, and con to 0. con is the placeholder matrix to add each repition. Then for each matrix     column, add matrix[i][k]*vector[k] to con. Then set container[i][1] = con.
     The result is a Matrix rows in the matrix by 1.
   '''
-
-  rA = len(matrix)# find the number of rows in matrix A
-  cA = len(matrix[0])# find the number of columns in matrix A
-  rB = len(vector)# find the number of rows in vector B
-  
-
-  if(matrix):
-    if(type(matrix) == str):
-      return
-
-  #initialize a container to be a matrix  with 0s for all entries.
-  container = [[0]*1 for row in range(rA)]
+  if ischeckmat(matrix) == True:
+    if ischeckvec(vector) == True:
+      rA = len(matrix)# find the number of rows in matrix A
+      cA = len(matrix[0])# find the number of columns in matrix A
+      rB = len(vector)# find the number of rows in vector B
 
 
-  for i in range(rA):
-    # iterate through rows of the matrix
-    # iterate through columns of vector whish should be 1
-    con= 0
-    for k in range(cA):
-      #iterate through columns of the matrix
-      con +=  matrix[i][k]*vector[k]
-      #use += to add con + calculated value to placeholder matrix
-    container[i] = con #final matrix will be the number of rows by 1 column
-  return container
+      #initialize a container to be a matrix  with 0s for all entries.
+      container = [[0]*1 for row in range(rA)]
+
+
+      for i in range(rA):
+        # iterate through rows of the matrix
+        # iterate through columns of vector whish should be 1
+        con= 0
+        for k in range(cA):
+          #iterate through columns of the matrix
+          con +=  matrix[i][k]*vector[k]
+          #use += to add con + calculated value to placeholder matrix
+        container[i] = con #final matrix will be the number of rows by 1 column
+      return container
 
 def transposeMat(matrix):
 
@@ -265,6 +262,8 @@ print(Q)
 Qtrans = transposeMat(Q)
 
 Qy = matVec(Qtrans,Ylist)
+
+
 
 
 
