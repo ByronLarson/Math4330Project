@@ -1,0 +1,11 @@
+1) 
+In Classical Gram-Schmidt when the orthogonalization takes place there will be small errors in random directions. Over time these errors add up. For each vector in the data set,the projections are removed and then  normalize what is left and add it to the orthogonal set.
+
+In Modifiec GS the difference is to orthogonalize the emerging vectors instead of the the original set.  Doing this reduces the ammount of errors compared to classical. Normalizing first and then subtracting accouints for less accuracy lost in the final answer.
+
+
+
+3)
+The conditioning number indicates the magnification of the changes as a function goes through operations. As a computer completes operations some numbers can be rounded off and over time these errors add up.  The conditioning number is used to estimate how much change occurs in the function. This number should be low to show that the difference between the final answer are close to the actual answer.  The larger the conditioning number is the greater the amount of error happened when the computer ran the mathematics.
+The stability of an algorithm measures how far off the final answers will be compared to an answer calculation without any rounding.  As the computer completes operations the answers will be rounded off.
+Both stability and condition number are needed for a function.  The stability of a function will show the potential difference between the actual and rounded answers where as the condition shows the actual difference between  the real answer and the estimated answer.
