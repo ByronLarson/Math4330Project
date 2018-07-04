@@ -304,7 +304,7 @@ print("Matrix R:",Rtrans)
 Qy = matVec(Q,Ylistcol)
 b = Qy
 
-print(b)
+print("Q*y Matrix:",b)
 
 
 def Backsub(R,b):
@@ -315,18 +315,21 @@ def Backsub(R,b):
 
   Ccontainer[cA] = b[cA] / R[cA][cA]
 
-  for i in reversed(range(len(b))
+  for i in reversed(range(len(b))):
 
     Ccontainer[i] = b[i]
 
-    for j in range(i+1,len(b))
+    for j in range(i+1,len(b)):
 
       Ccontainer[i] = Ccontainer[i] - Ccontainer[j]*R[j][i]
 
       Ccontainer[i] = Ccontainer[i] / R[i][i]
 
-  return c
+  return Ccontainer
 
 
+c = Backsub(Rtrans,b)
+
+print("Condition Number:",c)
 
 
