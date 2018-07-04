@@ -148,29 +148,38 @@ def matVec(matrix,vector):
     For each matrix row, each vector columns = 1, and con to 0. con is the placeholder matrix to add each repition. Then for each matrix     column, add matrix[i][k]*vector[k] to con. Then set container[i][1] = con.
     The result is a Matrix rows in the matrix by 1.
   '''
-  if ischeckmat(matrix) == True:
-    if ischeckvec(vector) == True:
-      rA = len(matrix)# find the number of rows in matrix A
-      cA = len(matrix[0])# find the number of columns in matrix A
-      rB = len(vector)# find the number of rows in vector B
+
+  rA = len(matrix)# find the number of rows in matrix A
+  cA = len(matrix[0])# find the number of columns in matrix A
+  rB = len(vector)# find the number of rows in vector B
+  cB = len(vector[0])# find number of columns in vector B; should be 1
+
+  if(vector):
+    if(cB > 1) or type(vector) == str:
+      return
+
+  if(matrix):
+    if(type(matrix) == str):
+      return
+
+  #initialize a container to be a matrix  with 0s for all entries.
+  container = [[0]*1 for row in range(rA)]
 
 
-      #initialize a container to be a matrix  with 0s for all entries.
-      container = [[0]*1 for row in range(rA)]
-
-
-      for i in range(rA):
-        # iterate through rows of the matrix
-        # iterate through columns of vector whish should be 1
-        con= 0
-        for k in range(cA):
-          #iterate through columns of the matrix
-          con +=  matrix[i][k]*vector[k]
-          #use += to add con + calculated value to placeholder matrix
-        container[i] = con #final matrix will be the number of rows by 1 column
-      return container
+  for i in range(rA):
+    # iterate through rows of the matrix
+    for j in range(cB):
+      # iterate through columns of vector whish should be 1
+      con= 0
+      for k in range(cA):
+        #iterate through columns of the matrix
+        con +=  matrix[i][k]*vector[k][j]
+        #use += to add con + calculated value to placeholder matrix
+      container[i] = con #final matrix will be the number of rows by 1 column
+  return container
 
 def transposeMat(matrix):
+
 
   '''
   Input
@@ -197,6 +206,33 @@ def transposeMat(matrix):
         container[j][i] = matrix[i][j]
 
     return container
+
+def transposeVec(vector):
+
+  '''
+  Input
+  vector is 1 x m dimensions
+  Output
+  vector is m x 1 dimensions
+
+  This function swaps the rows as columns and the columns as rows
+  '''
+  #if ischeckmat(vector) == True:
+
+
+  rA = len(vector) # number of rows in the matrix
+  #cA = len(vector[0]) # number of columns in the matrix
+
+  
+  container = [[0]*1 for i in range(rA)]
+    # starts an empty container with dimensions of the flipped matrix
+  
+  for i in range(rA):
+    
+    container[i][0] = vector[i]
+
+  return container
+
 
 def QRFactor(matrix):
 
@@ -258,14 +294,38 @@ QRFactA = QRFactor(VanderMat)
 Q = QRFactA[0]
 R = QRFactA[1]
 #call q from QRFactor(A)
-print(Q)
-Qtrans = transposeMat(Q)
 
-Qy = matVec(Qtrans,Ylist)
+#matrix R came out as a lower tirangular matrix, so I transposed the matrix to be upper triangular
+Rtrans = transposeMat(R)
+Ylistcol = transposeVec(Ylist)# my mat vec function multiplied a matrix by a list of column vectors, but input of Ylist was a in rows, I used a vector transpose to turn it into a list of column vectors
+print("Matrix Q:",Q)
+print("Matrix R:",Rtrans)
+#print(Ylistcol)
+Qy = matVec(Q,Ylistcol)
+b = Qy
+
+print(b)
 
 
+def Backsub(R,b):
 
+  cA = len(b)-1# find number of rows in matrix
+  
+  Ccontainer = [0] * len(b)
 
+  Ccontainer[cA] = b[cA] / R[cA][cA]
+
+  for i in reversed(range(len(b))
+
+    Ccontainer[i] = b[i]
+
+    for j in range(i+1,len(b))
+
+      Ccontainer[i] = Ccontainer[i] - Ccontainer[j]*R[j][i]
+
+      Ccontainer[i] = Ccontainer[i] / R[i][i]
+
+  return c
 
 
 
